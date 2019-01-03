@@ -1,0 +1,6 @@
+{{#if post}}
+  <div class='reviewable-conversation-post'>
+    <div class='username'>{{#link-to 'user' post.user}}@{{post.user.username}}{{/link-to}}</div>
+    <div class='excerpt'>{{{post.excerpt}}}</div>
+  </div>
+{{/if}}
