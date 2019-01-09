@@ -20,6 +20,8 @@ class Group < ActiveRecord::Base
   has_many :users, through: :group_users
   has_many :group_histories, dependent: :destroy
 
+  has_many :mailboxes, dependent: :destroy
+
   has_and_belongs_to_many :web_hooks
 
   before_save :downcase_incoming_email
@@ -772,6 +774,14 @@ end
 #  membership_request_template        :text
 #  messageable_level                  :integer          default(0)
 #  mentionable_level                  :integer          default(0)
+#  email_smtp_server                  :string
+#  email_smtp_port                    :integer
+#  email_smtp_ssl                     :boolean
+#  email_imap_server                  :string
+#  email_imap_port                    :integer
+#  email_imap_ssl                     :boolean
+#  email_username                     :string
+#  email_password                     :string
 #
 # Indexes
 #
