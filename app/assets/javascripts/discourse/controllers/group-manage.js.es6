@@ -3,15 +3,26 @@ import { default as computed } from "ember-addons/ember-computed-decorators";
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
 
-  @computed("model.automatic")
-  tabs(automatic) {
-    const defaultTabs = [
-      {
-        route: "group.manage.interaction",
-        title: "groups.manage.interaction.title"
-      },
-      { route: "group.manage.logs", title: "groups.manage.logs.title" }
-    ];
+  @computed("siteSettings.email_in", "model.automatic", "currentUser.admin")
+  tabs(emailIn, automatic, isAdmin) {
+    const defaultTabs = [];
+
+    defaultTabs.push({
+      route: "group.manage.interaction",
+      title: "groups.manage.interaction.title"
+    });
+
+    if (emailIn && isAdmin && !automatic) {
+      defaultTabs.push({
+        route: "group.manage.email",
+        title: "groups.manage.email.title"
+      });
+    }
+
+    defaultTabs.push({
+      route: "group.manage.logs",
+      title: "groups.manage.logs.title"
+    });
 
     if (!automatic) {
       defaultTabs.splice(0, 0, {

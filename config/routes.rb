@@ -517,6 +517,7 @@ Discourse::Application.routes.draw do
           manage/members
           manage/membership
           manage/interaction
+          manage/email
           manage/logs
         }.each do |path|
           get path => 'groups#show'
