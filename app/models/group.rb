@@ -20,7 +20,7 @@ class Group < ActiveRecord::Base
   has_many :users, through: :group_users
   has_many :group_histories, dependent: :destroy
 
-  has_many :mailboxes, dependent: :destroy
+  has_many :mailboxes, -> { order 'lower(name)' }, dependent: :destroy
 
   has_and_belongs_to_many :web_hooks
 

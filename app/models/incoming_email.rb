@@ -45,6 +45,9 @@ end
 #  rejection_message :text
 #  is_auto_generated :boolean          default(FALSE)
 #  is_bounce         :boolean          default(FALSE), not null
+#  uid_validity      :integer
+#  uid               :integer
+#  sync_imap         :boolean
 #
 # Indexes
 #

@@ -68,7 +68,11 @@ module Email
       return if is_blacklisted?
       DistributedMutex.synchronize(@message_id) do
         begin
-          return if IncomingEmail.exists?(message_id: @message_id)
+          @incoming_email = IncomingEmail.find_by(message_id: @message_id)
+          if @incoming_email
+            @incoming_email.update(imap_uid_validity: @opts[:uid_validity], imap_uid: @opts[:uid])
+            return
+          end
           ensure_valid_address_lists
           @from_email, @from_display_name = parse_from_field
           @from_user = User.find_by_email(@from_email)
